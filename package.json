@@ -1,6 +1,6 @@
 {
-  "name": "blog-front",
-  "version": "0.0.0",
+  "name": "vue-class-clsx",
+  "version": "0.0.1",
   "main": "dist/",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,14 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "build-bundle": "rollup -c"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nguyenvanlongweb/vue-class-clsx"
   },
   "dependencies": {},
   "devDependencies": {
