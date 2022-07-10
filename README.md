@@ -1,6 +1,7 @@
 # vue-class-clsx
 
 > A plugin that supports writing class modules in vuejs quickly and easily similar to classname and clsx for reactjs
+
 > Note that the plugin does not support vue2
 
 ## Install
