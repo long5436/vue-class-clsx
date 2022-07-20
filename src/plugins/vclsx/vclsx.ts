@@ -57,11 +57,16 @@ const vueClassName = (...args: any) => {
   return classNames.toString().replace(/\,/g, ' ').trim();
 };
 
-function config(params: any) {
+function config(params: Configure) {
   // console.log('config is, ', params);
-  if (params.name) {
-    configure.name = params.name;
+  if (params) {
+
+    if (params.hasOwnProperty('name')) {
+    
+      configure.name = params.name;
+    }
   }
+  
 }
 
 export { vueClassName, config };

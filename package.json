@@ -1,6 +1,6 @@
 {
   "name": "vue-class-clsx",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/",
   "license": "MIT",
   "scripts": {
