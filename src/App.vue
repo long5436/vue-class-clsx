@@ -15,7 +15,7 @@ function handleClick() {
   <button @click="handleClick">Click</button>
 </template>
 
-<style module>
+<style module="css">
 h1 {
   font-weight: normal;
 }

@@ -32,8 +32,24 @@ yarn add vue-class-clsx -D
    import { vclsxComponent as vclsx } from 'vue-class-clsx'
    ```
 
+## Options (new)
+
+> if you set custom module name for class name, then use below option. Note the option only works when used with global
+
+```html
+<style module="custom-name">
+</style>
+```
+
+```js
+app.use(vclsx, { name: 'custom-name' })
+```
+
+
 ## Example
+
 >Note: plugin only works with components that use `css module`
+
 ```html
 <style module>
 </style>

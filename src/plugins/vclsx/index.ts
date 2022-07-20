@@ -1,11 +1,12 @@
-import plugin from './vclsx';
+import { vueClassName, config } from './vclsx';
 
 const vclsx = {
   install(app: any, options: any) {
-    app.config.globalProperties.vclsx = plugin;
+    app.config.globalProperties.vclsx = vueClassName;
+    app.provide('config', config(options))
   },
 };
 
-const vclsxComponent = plugin;
+const vclsxComponent = vueClassName;
 
 export { vclsx, vclsxComponent };
