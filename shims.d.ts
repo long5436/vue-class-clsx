@@ -1,6 +1,4 @@
-/// <reference types="vite/client" />
-
-import { vueClassName } from 'vue-class-clsx';
+import { vueClassName } from './dist';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {

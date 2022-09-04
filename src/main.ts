@@ -1,11 +1,12 @@
-import { createApp } from 'vue'
+import { createApp } from 'vue';
 
-import App from './App.vue'
+// @ts-ignore
+import App from './App.vue';
 // import { vclsx } from '../dist'
-import { vclsx } from "./plugins/vclsx";
+import { vclsx } from './plugins/vclsx';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(vclsx, {name: 'css'})
+app.use(vclsx, { name: 'css' });
 
-app.mount('#app')
+app.mount('#app');

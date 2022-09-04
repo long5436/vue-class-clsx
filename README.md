@@ -7,7 +7,7 @@
 ## Install
 
 ```sh
-npm install vue-class-clsx --save
+npm install vue-class-clsx -D
 yarn add vue-class-clsx -D
 ```
 
@@ -15,21 +15,36 @@ yarn add vue-class-clsx -D
 
 1. Import with global
 
-   ```sh
-   import { createApp } from 'vue'
-   import App from './App.vue'
-   import { vclsx } from 'vue-class-clsx'
+   ```ts
+   import { createApp } from 'vue';
+   import App from './App.vue';
+   import { vclsx } from 'vue-class-clsx';
 
-   const app = createApp(App)
+   const app = createApp(App);
 
-   app.use(vclsx)
+   app.use(vclsx);
 
-   app.mount('#app')
+   app.mount('#app');
    ```
 
 2. Import with component
+
    ```sh
    import { vclsxComponent as vclsx } from 'vue-class-clsx'
+   ```
+
+3. Use with typescript
+
+   Add to env.d.ts
+
+   ```ts
+   import { vueClassName } from 'vue-class-clsx';
+
+   declare module '@vue/runtime-core' {
+     interface ComponentCustomProperties {
+       vclsx: typeof vueClassName;
+     }
+   }
    ```
 
 ## Options (new)
@@ -37,22 +52,19 @@ yarn add vue-class-clsx -D
 > if you set custom module name for class name, then use below option. Note the option only works when used with global
 
 ```html
-<style module="custom-name">
-</style>
+<style module="custom-name"></style>
 ```
 
 ```js
-app.use(vclsx, { name: 'custom-name' })
+app.use(vclsx, { name: 'custom-name' });
 ```
-
 
 ## Example
 
->Note: plugin only works with components that use `css module`
+> Note: plugin only works with components that use `css module`
 
 ```html
-<style module>
-</style>
+<style module></style>
 ```
 
 ```html
@@ -79,23 +91,24 @@ app.use(vclsx, { name: 'custom-name' })
 
 ```javascript
 // string
-vclsx('class1', 'class2', 'class3')
+vclsx('class1', 'class2', 'class3');
 //=> class1 class2 class3
 
 // array
-vclsx(['class1', 'class2', 'class3'])
+vclsx(['class1', 'class2', 'class3']);
 //=> class1 class2 class3
 
 // object
-vclsx({ class1: true, class2: false })
-//=> class1 
+vclsx({ class1: true, class2: false });
+//=> class1
 
 // string, object, array
-vclsx('class1', { class2: true, class3: false }, ['class4', { class5: true }])
+vclsx('class1', { class2: true, class3: false }, ['class4', { class5: true }]);
 //=> class1 class2 class4 class5
 ```
 
 ### Input
+
 > The vclsx function can take multiple arguments of type arrays, strings, and objects
 
 ### License MIT
