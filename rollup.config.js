@@ -1,37 +1,28 @@
 import vue from 'rollup-plugin-vue';
-// import scss from "rollup-plugin-scss";
-import commonjs from '@rollup/plugin-commonjs';
-// import typescript from 'rollup-plugin-typescript2';
 import typescript from '@rollup/plugin-typescript';
-import buble from '@rollup/plugin-buble';
-import { terser } from '@chiogen/rollup-plugin-terser';
+import dts from 'rollup-plugin-dts';
+import { terser } from 'rollup-plugin-terser';
 
 export default [
   {
     input: 'src/plugins/vclsx/index.ts',
     output: [
-      // {
-      //   format: 'esm',
-      //   file: 'dist/index.mjs',
-      // },
-      // {
-      //   format: 'cjs',
-      //   file: 'dist/index.js',
-      // },
       {
         format: 'es',
-        file: 'dist/index.ts',
+        file: 'build/index.js',
       },
     ],
-    plugins: [
-      typescript(),
-      vue(),
-      // scss(),
-      commonjs(),
-      buble({
-        transforms: { forOf: false },
-      }),
-      terser(),
+    plugins: [typescript(), vue(), terser()],
+  },
+  {
+    input: 'src/plugins/vclsx/index.ts',
+    output: [
+      {
+        format: 'es',
+        sourcemap: false,
+        file: `build/index.d.ts`,
+      },
     ],
+    plugins: [dts()],
   },
 ];

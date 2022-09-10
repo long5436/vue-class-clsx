@@ -1,9 +1,9 @@
-/// <reference types="vite/client" />
+import type { createVClsx } from './build';
 
-import { vueClassName } from 'vue-class-clsx';
+/// <reference types="vite/client" />
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    vclsx: typeof vueClassName;
+    vclsx: createVClsx;
   }
 }

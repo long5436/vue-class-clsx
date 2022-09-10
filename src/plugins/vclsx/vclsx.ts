@@ -1,17 +1,13 @@
 import { useCssModule } from 'vue';
+import type { Options } from './type';
 
-interface Configure {
-  name: string;
-}
-
+const configure: Options = { cssModuleName: '', functionName: '' };
 const keyTrue: { value: Array<string> } = { value: [] };
-const configure: Configure = { name: '' };
 
 function getKeyTrue(...data: any) {
   // console.log(typeof data);
   data.map((e: any) => {
-    if (e === null || e === undefined) {
-    } else if (Array.isArray(e)) {
+    if (Array.isArray(e)) {
       e.map((e: any) => {
         getKeyTrue(e);
       });
@@ -29,11 +25,15 @@ function getKeyTrue(...data: any) {
       }
     }
   });
+
+  return keyTrue;
 }
 
 // const vclsx = (...args: any) => {
 const vueClassName = (...args: any) => {
-  const module = configure.name ? useCssModule(configure.name) : useCssModule();
+  const module = configure.cssModuleName
+    ? useCssModule(configure.cssModuleName)
+    : useCssModule();
 
   const keys: string = args.map((key: any) => key);
   const classKey = module;
@@ -57,16 +57,12 @@ const vueClassName = (...args: any) => {
   return classNames.toString().replace(/\,/g, ' ').trim();
 };
 
-function config(params: Configure) {
-  // console.log('config is, ', params);
+function config(params: Options) {
   if (params) {
-
-    if (params.hasOwnProperty('name')) {
-    
-      configure.name = params.name;
+    if (params.hasOwnProperty('cssModuleName')) {
+      configure.cssModuleName = params.cssModuleName;
     }
   }
-  
 }
 
 export { vueClassName, config };
