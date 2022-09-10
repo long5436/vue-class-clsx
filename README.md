@@ -23,7 +23,7 @@ yarn add vue-class-clsx -D
    import { createVClsx } from 'vue-class-clsx'; // import vclsx
 
    const app = createApp(App);
-   app.use(vclsx, {}); // use vclsx
+   app.use(createVClsx, {}); // use vclsx
    app.mount('#app');
    ```
 
