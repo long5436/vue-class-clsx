@@ -4,6 +4,8 @@
 
 > Note that the plugin does not support vue2
 
+### [Demo](https://nguyenvanlongweb.github.io/vue-class-clsx/)
+
 ## Install
 
 ```sh
