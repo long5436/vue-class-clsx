@@ -2,6 +2,7 @@
   "name": "vue-class-clsx",
   "version": "0.0.12",
   "main": "build/",
+  "author": "Nguyen Van Long",
   "license": "MIT",
   "types": "./build/index.d.ts",
   "scripts": {
@@ -29,7 +30,9 @@
     "class",
     "css",
     "scss",
-    "css-module"
+    "css-module",
+    "lib",
+    "join-class"
   ],
   "dependencies": {},
   "devDependencies": {
