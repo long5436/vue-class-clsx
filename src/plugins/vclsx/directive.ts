@@ -35,9 +35,9 @@ function changeClasses(el: any, rawClasses: any, props?: any) {
     let propClasses = props.class;
 
     if (typeof propClasses === 'string') {
-      propClasses = [propClasses];
+      propClasses = propClasses.split(' ');
     }
-    result = [...result, props.class];
+    result = [...result, ...propClasses];
   }
 
   el.classList.remove(...el.classList);

@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 
 // @ts-ignore
 import App from './App.vue';
+import './index.css';
 // import { createVClsx } from '../build';
 import { createVClsx } from './plugins/vclsx';
 
