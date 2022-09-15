@@ -1,6 +1,6 @@
 {
   "name": "vue-class-clsx",
-  "version": "0.0.11",
+  "version": "0.1.0",
   "main": "build/",
   "license": "MIT",
   "types": "./build/index.d.ts",
