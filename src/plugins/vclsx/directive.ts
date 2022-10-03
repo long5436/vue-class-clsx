@@ -1,18 +1,15 @@
-import type { App } from 'vue';
-import { getKeyTrue } from './getKey';
-import { vueClassName } from './vx';
+import type { App } from "vue";
+import { getKeyTrue } from "./getKey";
+import { vueClassName } from "./vx";
 
-import { useCssModule } from 'vue';
+import { useCssModule } from "vue";
 
 let classInput: any;
 let moduleClass: any = {};
-let cssModuleName: string = '';
+let cssModuleName: string = "";
 
-const createDirective = (app: App, name: string): void => {
+const createDirective = (_app: App, name: string): void => {
   cssModuleName = name;
-
-  // @ts-ignore
-  // moduleClass = app._component?.__cssModules[cssModuleName] || [];
 };
 
 const clear = (arr: any) => {
@@ -22,20 +19,19 @@ const clear = (arr: any) => {
 function changeClasses(el: any, rawClasses: any, props?: any) {
   let classBind = rawClasses;
 
-  if (typeof classBind === 'string') {
+  if (typeof classBind === "string") {
     classBind = [classBind];
   }
 
   classInput = getKeyTrue([clear, classBind]);
 
   let result = vueClassName(classInput, moduleClass);
-  // console.log('updated', result, classBind, classInput);
 
   if (props?.class) {
     let propClasses = props.class;
 
-    if (typeof propClasses === 'string') {
-      propClasses = propClasses.split(' ');
+    if (typeof propClasses === "string") {
+      propClasses = propClasses.split(" ");
     }
     result = [...result, ...propClasses];
   }

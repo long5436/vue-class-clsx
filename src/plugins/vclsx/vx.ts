@@ -1,11 +1,8 @@
-const vueClassName = (rawClasses: Array<string>, moduleClasses: any) => {
-  const result: Array<string> = rawClasses
-    .map((item: string) => {
-      return moduleClasses[item];
-    })
-    .filter((e) => e);
-  return result;
-  //   return result.join(' ').replace(/\,/g, ' ').trim();
+const vueClassName = (
+  rawClasses: Array<string>,
+  moduleClasses: any
+): Array<string> => {
+  return rawClasses.map((item: string) => moduleClasses[item]).filter((e) => e);
 };
 
 export { vueClassName };
