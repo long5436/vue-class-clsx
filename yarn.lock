@@ -743,6 +743,11 @@ json-parse-better-errors@^1.0.1:
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
   integrity sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==
 
+just-typeof@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/just-typeof/-/just-typeof-3.1.1.tgz#1cbd8f64d8d7f860ab664e94f620ea02f6e316f7"
+  integrity sha512-jXXgtHTkUZKolFnkCwWU2P5vkblIhrid4SNXP0QdvQM3Fp8kgBu/A763p5VCYJRmQdQubNr4f4skeT4csGdnGg==
+
 load-json-file@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-4.0.0.tgz#2f5f45ab91e33216234fd53adab668eb4ec0993b"
@@ -766,6 +771,11 @@ magic-string@^0.26.1:
   integrity sha512-u1Po0NDyFcwdg2nzHT88wSK0+Rih0N1M+Ph1Sp08k8yvFFU3KR72wryS7e1qMPJypt99WB7fIFVCA92mQrMjrg==
   dependencies:
     sourcemap-codec "^1.4.8"
+
+map-obj@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-5.0.2.tgz#174ad9f7e5e4e777a219126d9a734ff3e14a1c68"
+  integrity sha512-K6K2NgKnTXimT3779/4KxSvobxOtMmx1LBZ3NwRxT/MDIR3Br/fQ4Q+WCX5QxjyUR8zg5+RV9Tbf2c5pAWTD2A==
 
 memorystream@^0.3.1:
   version "0.3.1"

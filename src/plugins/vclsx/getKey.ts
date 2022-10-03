@@ -1,35 +1,60 @@
-const keyTrue: { value: Array<string> } = { value: [] };
+import typeOf from 'just-typeof';
+import mapObject, { mapObjectSkip } from 'map-obj';
 
-function getKeyTrue(...data: any) {
-  if (Array.isArray(data)) {
-    const [func, ...rest] = data;
+import type { ArgsItem, Args } from './type';
 
-    if (typeof func === 'function') {
-      keyTrue.value = [];
-    }
+let resultValue: Array<string> = [];
+let valueTmp: string = '';
+
+const mapper: any = (key: string, val: boolean) => {
+  if (val) {
+    resultValue.push(key);
   }
 
-  data.map((e: any) => {
-    if (Array.isArray(e)) {
-      e.map((e: any) => {
-        getKeyTrue(e);
-      });
-    } else if (typeof e === 'object') {
-      Object.keys(e).map((k: any) => {
-        if (e[k]) {
-          keyTrue.value.push(k);
-        }
-      });
-    } else if (typeof e === 'string') {
-      keyTrue.value.push(e);
-    } else if (typeof e === 'number') {
-      if (e !== 0 && !isNaN(e)) {
-        keyTrue.value.push(e.toString());
+  return mapObjectSkip;
+};
+
+const handleString = (value: ArgsItem): void => {
+  valueTmp = value.toString();
+  resultValue.push(valueTmp);
+};
+
+const handleObject = (value: Record<string, any> | ArgsItem): void => {
+  // @ts-ignore
+  mapObject(value, mapper);
+};
+
+const func = (...args: Args): void => {
+  args.map((value: ArgsItem): void => {
+    const typeItem: string = typeOf(value);
+
+    switch (typeItem) {
+      case 'string': {
+        handleString(value);
+        break;
       }
+      case 'array': {
+        func(...value);
+        break;
+      }
+      case 'object': {
+        handleObject(value);
+        break;
+      }
+      case 'number':
+        break;
+      case 'function':
+        resultValue = [];
+        break;
+      default:
+        break;
     }
   });
+};
 
-  return keyTrue.value;
-}
+const getKeyTrue = (...args: Args): Array<string> => {
+  func(args);
+  return resultValue;
+};
 
 export { getKeyTrue };

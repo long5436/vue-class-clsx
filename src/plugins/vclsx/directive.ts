@@ -1,22 +1,14 @@
-import type { App } from 'vue';
+// import type { App } from 'vue';
+import type { App, ModuleClasses } from './type';
 import { getKeyTrue } from './getKey';
 import { vueClassName } from './vx';
 
-import { useCssModule } from 'vue';
-
-let classInput: any;
+let classInput: Array<string>;
 let moduleClass: any = {};
 let cssModuleName: string = '';
 
 const createDirective = (app: App, name: string): void => {
   cssModuleName = name;
-
-  // @ts-ignore
-  // moduleClass = app._component?.__cssModules[cssModuleName] || [];
-};
-
-const clear = (arr: any) => {
-  return false;
 };
 
 function changeClasses(el: any, rawClasses: any, props?: any) {
@@ -26,11 +18,9 @@ function changeClasses(el: any, rawClasses: any, props?: any) {
     classBind = [classBind];
   }
 
-  classInput = getKeyTrue([clear, classBind]);
+  classInput = getKeyTrue(() => {}, classBind);
 
   let result = vueClassName(classInput, moduleClass);
-  // console.log('updated', result, classBind, classInput);
-
   if (props?.class) {
     let propClasses = props.class;
 
@@ -38,6 +28,7 @@ function changeClasses(el: any, rawClasses: any, props?: any) {
       propClasses = propClasses.split(' ');
     }
     result = [...result, ...propClasses];
+    console.log(result);
   }
 
   el.classList.remove(...el.classList);
@@ -54,6 +45,7 @@ const handleDirective = {
   updated(el: any, binding: any, vnode: any) {
     moduleClass =
       vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName];
+
     changeClasses(el, binding.value, vnode.props);
   },
 };
