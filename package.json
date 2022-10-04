@@ -1,6 +1,6 @@
 {
   "name": "vue-class-clsx",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "main": "build/",
   "author": "Nguyen Van Long",
   "license": "MIT",
@@ -34,7 +34,10 @@
     "lib",
     "join-class"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "just-typeof": "^3.1.1",
+    "map-obj": "^5.0.2"
+  },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.4.0",
     "@types/node": "^16.11.41",

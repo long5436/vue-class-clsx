@@ -1,61 +1,30 @@
 import { useCssModule } from 'vue';
-import type { Options } from './type';
+import { getKeyTrue } from './getKey';
+import type { Options, Args, ModuleClasses } from './type';
 
 const configure: Options = { cssModuleName: '', functionName: '' };
-const keyTrue: { value: Array<string> } = { value: [] };
+let keyTrue: Array<string> = [];
+let cssModuleKey: ModuleClasses = {};
+let resultClasses: string = '';
 
-function getKeyTrue(...data: any) {
-  // console.log(typeof data);
-  data.map((e: any) => {
-    if (Array.isArray(e)) {
-      e.map((e: any) => {
-        getKeyTrue(e);
-      });
-    } else if (typeof e === 'object') {
-      Object.keys(e).map((k: any) => {
-        if (e[k]) {
-          keyTrue.value.push(k);
-        }
-      });
-    } else if (typeof e === 'string') {
-      keyTrue.value.push(e);
-    } else if (typeof e === 'number') {
-      if (e !== 0 && !isNaN(e)) {
-        keyTrue.value.push(e.toString());
-      }
-    }
-  });
-
-  return keyTrue;
-}
-
-// const vclsx = (...args: any) => {
-const vueClassName = (...args: any) => {
-  const module = configure.cssModuleName
+function vueClassName(...args: Args) {
+  cssModuleKey = configure.cssModuleName
     ? useCssModule(configure.cssModuleName)
     : useCssModule();
 
-  const keys: string = args.map((key: any) => key);
-  const classKey = module;
+  keyTrue = getKeyTrue(() => {}, args);
 
-  keyTrue.value = [];
-  getKeyTrue(args);
-
-  const classNames: Array<any> = keyTrue.value
+  resultClasses = keyTrue
     .map((key: string) => {
-      if (classKey[key] !== undefined) {
-        // console.log(classKey[key]);
-        return classKey[key];
-      }
+      return cssModuleKey[key] ? cssModuleKey[key] : '';
     })
-    .filter((e) => e);
+    .filter((e) => e)
+    .join(' ')
+    .replace(/\,/g, ' ')
+    .trim();
 
-  //   console.log(classNames);
-
-  //   console.log(classNames.toString().replace(/\s+/g, ''));
-
-  return classNames.toString().replace(/\,/g, ' ').trim();
-};
+  return resultClasses;
+}
 
 function config(params: Options) {
   if (params) {

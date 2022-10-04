@@ -23,12 +23,12 @@ const green = ref(true);
   <!-- use with function -->
   <h1>Use with :class function</h1>
   <h2 :class="vclsx({ t1: green, t2: bg, t3: italic })">
-    Hello world! (button change)
+    Hello world (button change)
   </h2>
-  <h2 :class="vclsx('t1', 't2')">Hello world!</h2>
-  <h2 :class="vclsx(['t1', 't2'])">Hello world!</h2>
-  <h2 :class="vclsx(['t1', 't2', { t3: true }])">Hello world!</h2>
-  <h2 :class="vclsx(['t1', 't2', ['fs', { t3: true }]])">Hello world!</h2>
+  <h2 :class="vclsx('t1', 't2')">Hello world</h2>
+  <h2 :class="vclsx(['t1', 't2'])">Hello world</h2>
+  <h2 :class="vclsx(['t1', 't2', { t3: true }])">Hello world</h2>
+  <h2 :class="vclsx(['t1', 't2', ['fs', { t3: true }]])">Hello world</h2>
   <hr />
   <button v-class-module="{ active: bg }" @click="bg = !bg">background</button>
   <button v-class-module="{ active: italic }" @click="italic = !italic">

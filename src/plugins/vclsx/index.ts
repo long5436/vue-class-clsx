@@ -1,5 +1,4 @@
-import type { App, Plugin } from 'vue';
-import type { Options } from './type';
+import type { Options, App, Plugin } from './type';
 import { vueClassName, config } from './vclsx';
 import { handleDirective, createDirective } from './directive';
 
