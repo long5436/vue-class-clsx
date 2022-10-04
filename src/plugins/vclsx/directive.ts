@@ -4,7 +4,7 @@ import { getKeyTrue } from './getKey';
 import { vueClassName } from './vx';
 
 let classInput: Array<string>;
-let moduleClass: any = {};
+let moduleClass: ModuleClasses = {};
 let cssModuleName: string = '';
 
 const createDirective = (app: App, name: string): void => {
@@ -36,13 +36,13 @@ function changeClasses(el: any, rawClasses: any, props?: any) {
 }
 
 const handleDirective = {
-  beforeMount(el: any, binding: any, vnode: any, prevVnode: any) {
+  beforeMount(el: HTMLElement, binding: any, vnode: any) {
     moduleClass =
-      vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName];
+      vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName] || {};
 
     changeClasses(el, binding.value, vnode.props);
   },
-  updated(el: any, binding: any, vnode: any) {
+  updated(el: HTMLElement, binding: any, vnode: any) {
     moduleClass =
       vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName];
 

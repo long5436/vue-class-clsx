@@ -6,11 +6,10 @@ import type { ArgsItem, Args } from './type';
 let resultValue: Array<string> = [];
 let valueTmp: string = '';
 
-const mapper: any = (key: string, val: boolean) => {
+const mapper: Object = (key: string, val: boolean) => {
   if (val) {
     resultValue.push(key);
   }
-
   return mapObjectSkip;
 };
 

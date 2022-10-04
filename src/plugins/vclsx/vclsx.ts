@@ -1,31 +1,30 @@
 import { useCssModule } from 'vue';
-import type { Options, Args } from './type';
 import { getKeyTrue } from './getKey';
+import type { Options, Args, ModuleClasses } from './type';
 
 const configure: Options = { cssModuleName: '', functionName: '' };
-const keyTrue: { value: Array<string> } = { value: [] };
+let keyTrue: Array<string> = [];
+let cssModuleKey: ModuleClasses = {};
+let resultClasses: string = '';
 
-const vueClassName = (...args: any) => {
-  const module = configure.cssModuleName
+function vueClassName(...args: Args) {
+  cssModuleKey = configure.cssModuleName
     ? useCssModule(configure.cssModuleName)
     : useCssModule();
 
-  const keys: string = args.map((key: any) => key);
-  const classKey = module;
+  keyTrue = getKeyTrue(() => {}, args);
 
-  keyTrue.value = getKeyTrue(() => {}, args);
-
-  const classNames: Array<any> = keyTrue.value
+  resultClasses = keyTrue
     .map((key: string) => {
-      if (classKey[key] !== undefined) {
-        // console.log(classKey[key]);
-        return classKey[key];
-      }
+      return cssModuleKey[key] ? cssModuleKey[key] : '';
     })
-    .filter((e) => e);
+    .filter((e) => e)
+    .join(' ')
+    .replace(/\,/g, ' ')
+    .trim();
 
-  return classNames.toString().replace(/\,/g, ' ').trim();
-};
+  return resultClasses;
+}
 
 function config(params: Options) {
   if (params) {
