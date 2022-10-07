@@ -23,31 +23,34 @@ const handleObject = (value: Record<string, any> | ArgsItem): void => {
   mapObject(value, mapper);
 };
 
+const switchTypeItem = (value: any) => {
+  const typeItem: string = typeOf(value);
+  switch (typeItem) {
+    case 'string': {
+      handleString(value);
+      break;
+    }
+    case 'array': {
+      func(...value);
+      break;
+    }
+    case 'object': {
+      handleObject(value);
+      break;
+    }
+    case 'number':
+      break;
+    case 'function':
+      resultValue = [];
+      break;
+    default:
+      break;
+  }
+}
+
 const func = (...args: Args): void => {
   args.map((value: ArgsItem): void => {
-    const typeItem: string = typeOf(value);
-
-    switch (typeItem) {
-      case 'string': {
-        handleString(value);
-        break;
-      }
-      case 'array': {
-        func(...value);
-        break;
-      }
-      case 'object': {
-        handleObject(value);
-        break;
-      }
-      case 'number':
-        break;
-      case 'function':
-        resultValue = [];
-        break;
-      default:
-        break;
-    }
+   switchTypeItem(value); 
   });
 };
 

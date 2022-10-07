@@ -5,7 +5,6 @@ import type { Options, Args, ModuleClasses } from './type';
 const configure: Options = { cssModuleName: '', functionName: '' };
 let keyTrue: Array<string> = [];
 let cssModuleKey: ModuleClasses = {};
-let resultClasses: string = '';
 
 function vueClassName(...args: Args) {
   cssModuleKey = configure.cssModuleName
@@ -14,23 +13,17 @@ function vueClassName(...args: Args) {
 
   keyTrue = getKeyTrue(() => {}, args);
 
-  resultClasses = keyTrue
-    .map((key: string) => {
-      return cssModuleKey[key] ? cssModuleKey[key] : '';
-    })
+  return keyTrue
+    .map((key: string) => cssModuleKey[key] ? cssModuleKey[key] : '')
     .filter((e) => e)
     .join(' ')
     .replace(/\,/g, ' ')
     .trim();
-
-  return resultClasses;
 }
 
 function config(params: Options) {
-  if (params) {
-    if (params.hasOwnProperty('cssModuleName')) {
-      configure.cssModuleName = params.cssModuleName;
-    }
+  if (params && params.hasOwnProperty('cssModuleName')) {
+    configure.cssModuleName = params.cssModuleName;
   }
 }
 
