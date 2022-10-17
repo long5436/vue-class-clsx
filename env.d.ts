@@ -4,6 +4,6 @@ import type { createVClsx } from './build';
 
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
-    vclsx: createVClsx;
+    vx: createVClsx;
   }
 }

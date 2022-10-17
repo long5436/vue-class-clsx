@@ -1,30 +1,24 @@
 import { useCssModule } from 'vue';
-import { getKeyTrue } from './getKey';
-import type { Options, Args, ModuleClasses } from './type';
+import type { Args, ModuleClasses } from './type';
 
-const configure: Options = { cssModuleName: '', functionName: '' };
-let keyTrue: Array<string> = [];
+import { optionsConfigure } from './configure';
+import { filterClassesFromInput } from './utils';
+
+const { cssModuleName } = optionsConfigure;
+
+let filteredClasses: Array<string> = [];
 let cssModuleKey: ModuleClasses = {};
 
-function vueClassName(...args: Args) {
-  cssModuleKey = configure.cssModuleName
-    ? useCssModule(configure.cssModuleName)
-    : useCssModule();
+function vueClassName(...args: Args): string {
+  cssModuleKey = cssModuleName ? useCssModule(cssModuleName) : useCssModule();
 
-  keyTrue = getKeyTrue(() => {}, args);
+  filteredClasses = filterClassesFromInput({ args: [args] });
 
-  return keyTrue
-    .map((key: string) => cssModuleKey[key] ? cssModuleKey[key] : '')
-    .filter((e) => e)
+  return filteredClasses
+    .map((key: string) => (cssModuleKey[key] ? cssModuleKey[key] : ''))
     .join(' ')
     .replace(/\,/g, ' ')
     .trim();
 }
 
-function config(params: Options) {
-  if (params && params.hasOwnProperty('cssModuleName')) {
-    configure.cssModuleName = params.cssModuleName;
-  }
-}
-
-export { vueClassName, config };
+export default vueClassName;

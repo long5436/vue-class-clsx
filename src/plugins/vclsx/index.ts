@@ -1,28 +1,14 @@
 import type { Options, App, Plugin } from './type';
-import { vueClassName, config } from './vclsx';
-import { handleDirective, createDirective } from './directive';
+import vueClassName from './vclsx';
+import handleDirective from './directive';
+import { setConfigure, optionsConfigure } from './configure';
 
 const createVClsx: Plugin = {
-  install(app: App, options: Options) {
-    const functionName: string = options?.functionName
-      ? options.functionName
-      : 'vclsx';
+  install(app: App, options: Options): void {
+    setConfigure(options);
 
-    const directiveName: string = options?.directiveName
-      ? options.directiveName
-      : 'v-class-module'.toString();
-
-    const cssModuleName: string = options?.cssModuleName
-      ? options.cssModuleName
-      : '$style';
-
-    const resultDirectiveName = directiveName.replace('v-', '');
-
-    createDirective(app, cssModuleName);
-
-    app.config.globalProperties[functionName] = vueClassName;
-    app.provide('config', config(options));
-    app.directive(resultDirectiveName, handleDirective);
+    app.config.globalProperties[optionsConfigure.functionName] = vueClassName;
+    app.directive(optionsConfigure.directiveName, handleDirective);
   },
 };
 
