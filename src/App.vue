@@ -1,73 +1,87 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+// @ts-ignore
+import Prism from 'prismjs';
+import 'prismjs/plugins/toolbar/prism-toolbar';
+import 'prismjs/plugins/toolbar/prism-toolbar.css';
+import 'prismjs/themes/prism-tomorrow.min.css';
+import 'prismjs/plugins/show-language/prism-show-language';
+import 'prismjs/plugins/line-numbers/prism-line-numbers';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
+import 'prismjs/plugins/normalize-whitespace/prism-normalize-whitespace';
+import 'prismjs/plugins/match-braces/prism-match-braces.min';
+import 'prismjs/plugins/match-braces/prism-match-braces.css';
 
-const bg = ref(false);
-const italic = ref(true);
-const green = ref(true);
+const code1 = ref(`<h3 :class="vx('green', ['italic', { big: true }])">Hello</h3>
+    <h3 :class="vx(['green', ['italic', { big: true }]])">Hello</h3>
+    <h3 :class="vx('red')">Hello</h3>
+    <h3 :class="vx('blue')">Hello</h3>`);
+
+const code2 = ref(` <h3 v-vx="['green', ['italic', { big: true }]]">Hello</h3>
+    <h3 v-vx="'red'">Hello</h3>
+    <h3 v-vx="'blue'">Hello</h3>`);
+
+onMounted(() => {
+  Prism.highlightAll();
+});
 </script>
 
 <template>
-  <!-- use with v-binding -->
-  <h1>Use with v-binding</h1>
-
-  <h2 v-class-module="{ t1: green, t2: bg, t3: italic }">
-    Hello world! (button change)
-  </h2>
-  <h2 v-class-module="'t1'">Hello world!</h2>
-  <h2 v-class-module="['t1', 't2']">Hello world!</h2>
-  <h2 v-class-module="['t1', 't2', { t3: true }]">Hello world!</h2>
-  <h2 v-class-module="['t1', 't2', ['fs', { t3: true }]]">Hello world!</h2>
-
-  <hr />
-
-  <!-- use with function -->
-  <h1>Use with :class function</h1>
-  <h2 :class="vclsx({ t1: green, t2: bg, t3: italic })">
-    Hello world (button change)
-  </h2>
-  <h2 :class="vclsx('t1', 't2')">Hello world</h2>
-  <h2 :class="vclsx(['t1', 't2'])">Hello world</h2>
-  <h2 :class="vclsx(['t1', 't2', { t3: true }])">Hello world</h2>
-  <h2 :class="vclsx(['t1', 't2', ['fs', { t3: true }]])">Hello world</h2>
-  <hr />
-  <button v-class-module="{ active: bg }" @click="bg = !bg">background</button>
-  <button v-class-module="{ active: italic }" @click="italic = !italic">
-    Italic
-  </button>
-  <button v-class-module="{ active: green }" @click="green = !green">
-    Green
-  </button>
+  <div class="line-numbers rainbow-braces no-brace-hover">
+    <div>
+      <h2>Use with function</h2>
+      <pre class="">
+        <code class="language-js">
+          {{ code1 }}
+        </code>
+        </pre>
+      <h3 :class="vx('green', ['italic', { big: true }])">Hello</h3>
+      <h3 :class="vx(['green', ['italic', { big: true }]])">Hello</h3>
+      <h3 :class="vx('red')">Hello</h3>
+      <h3 :class="vx('blue')">Hello</h3>
+    </div>
+    <hr />
+    <div>
+      <h2>Use with binding</h2>
+      <pre class="language-js">
+        <code> {{ code2 }}</code>
+      </pre>
+      <h3 v-vx="['green', ['italic', { big: true }]]">Hello</h3>
+      <h3 v-vx="'red'">Hello</h3>
+      <h3 v-vx="'blue'">Hello</h3>
+    </div>
+  </div>
 </template>
-
 <style module>
-* {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+h3 {
+  margin: 0;
 }
 
-button {
-  color: #333;
-  margin-right: 4px;
+pre,
+code,
+pre span,
+code span {
+  font-family: monospace;
+  font-size: 1rem;
 }
 
-.active {
-  background: #333;
-  color: #fff;
-}
-
-.fs {
-  font-size: 3rem;
-}
-
-.t1 {
+.green {
   color: green;
 }
 
-.t2 {
-  background: yellow;
+.red {
+  color: red;
 }
 
-.t3 {
+.blue {
+  color: cornflowerblue;
+}
+
+.big {
+  font-size: 3rem;
+}
+
+.italic {
   font-style: italic;
 }
 </style>

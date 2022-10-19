@@ -8,9 +8,9 @@ export declare type ArgsItem =
   | boolean;
 
 export interface Options {
-  functionName?: string;
-  cssModuleName?: string;
-  directiveName?: string;
+  functionName: string;
+  cssModuleName: string;
+  directiveName: string;
 }
 
 export interface ModuleClasses {

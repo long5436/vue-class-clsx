@@ -1,5 +1,4 @@
 import { createApp } from 'vue';
-
 // @ts-ignore
 import App from './App.vue';
 import './index.css';
@@ -9,9 +8,9 @@ import { createVClsx } from './plugins/vclsx';
 const app = createApp(App);
 
 app.use(createVClsx, {
-  // functionName: 'vx',
+  functionName: 'vx',
   // cssModuleName: 'css',
-  // directiveName: 'v-vx',
+  directiveName: 'v-vx',
 });
 
 app.mount('#app');
