@@ -4,6 +4,7 @@ src
 public
 index.html
 docs
+dist
 
 
 # local env files
