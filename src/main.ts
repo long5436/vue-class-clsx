@@ -9,7 +9,6 @@ const app = createApp(App);
 
 app.use(createVClsx, {
   functionName: 'vx',
-  // cssModuleName: 'css',
   directiveName: 'v-vx',
 });
 
