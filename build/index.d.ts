@@ -1,6 +1,11 @@
-import { Plugin } from 'vue';
+import { App } from 'vue';
 
 declare type Args = Array<Array<Args> | string | Object | boolean>;
+interface Options {
+    functionName: string;
+    cssModuleName: string;
+    directiveName: string;
+}
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
         createVclsx: Function;
@@ -9,7 +14,9 @@ declare module '@vue/runtime-core' {
 
 declare function vueClassName(...args: Args): string;
 
-declare const createVClsx: Plugin;
+declare function createVclsx(options?: Options | {}): {
+    install(app: App): void;
+};
 declare const vclsxComponent: typeof vueClassName;
 
-export { createVClsx, vclsxComponent };
+export { createVclsx, vclsxComponent };
