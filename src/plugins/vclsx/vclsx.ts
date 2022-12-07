@@ -1,5 +1,5 @@
 import { useCssModule } from 'vue';
-import type { Args, ModuleClasses } from './type';
+import type { Args, ModuleClasses, Options } from './type';
 
 import { optionsConfigure } from './configure';
 import { filterClassesFromInput } from './utils';

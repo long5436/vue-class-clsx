@@ -2,14 +2,10 @@ import { createApp } from 'vue';
 // @ts-ignore
 import App from './App.vue';
 import './index.css';
-// import { createVClsx } from '../build';
-import { createVClsx } from './plugins/vclsx';
+import { createVclsx } from './plugins/vclsx';
 
 const app = createApp(App);
+const vclsx = createVclsx({ functionName: 'vx', directiveName: 'v-vx' });
 
-app.use(createVClsx, {
-  functionName: 'vx',
-  directiveName: 'v-vx',
-});
-
+app.use(vclsx);
 app.mount('#app');

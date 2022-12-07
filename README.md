@@ -19,11 +19,13 @@ yarn add vue-class-clsx -D
 
    ```ts
    import { createApp } from 'vue';
-   import App from './App.vue';
    import { createVClsx } from 'vue-class-clsx'; // import vclsx
+   import App from './App.vue';
 
    const app = createApp(App);
-   app.use(createVClsx, {}); // use vclsx
+   const vclsx = createVClsx();
+
+   app.use(vclsx); // use vclsx
    app.mount('#app');
    ```
 
@@ -91,13 +93,13 @@ yarn add vue-class-clsx -D
 ```
 
 ```js
-app.use(vclsx, { cssModuleName: 'custom-name' });
+const vclsx = createVclsx({ cssModuleName: 'custom-name' });
 ```
 
 ### 2. Custom function name
 
 ```js
-app.use(vclsx, { functionName: 'vx' });
+const vclsx = createVclsx({ functionName: 'vx' });
 ```
 
 ```html
@@ -123,7 +125,7 @@ declare module '@vue/runtime-core' {
 ### 3. Custom v-binding name
 
 ```js
-app.use(vclsx, { directiveName: 'v-vx' });
+const vclsx = createVclsx({ directiveName: 'v-vx' });
 ```
 
 ```html
@@ -160,9 +162,7 @@ app.use(vclsx, { directiveName: 'v-vx' });
   <!-- use with v-binding -->
   <h1>Use with v-binding</h1>
 
-  <h2 v-class-module="{ t1: green, t2: bg, t3: italic }">
-    Hello world! (button change)
-  </h2>
+  <h2 v-class-module="{ t1: green, t2: bg, t3: italic }">Hello world! (button change)</h2>
   <h2 v-class-module="'t1'">Hello world!</h2>
   <h2 v-class-module="['t1', 't2']">Hello world!</h2>
   <h2 v-class-module="['t1', 't2', { t3: true }]">Hello world!</h2>
@@ -171,26 +171,20 @@ app.use(vclsx, { directiveName: 'v-vx' });
   <hr />
   <!-- use with function -->
   <h1>Use with :class function</h1>
-  <h2 :class="vclsx({ t1: green, t2: bg, t3: italic })">
-    Hello world! (button change)
-  </h2>
+  <h2 :class="vclsx({ t1: green, t2: bg, t3: italic })">Hello world! (button change)</h2>
   <h2 :class="vclsx('t1', 't2')">Hello world!</h2>
   <h2 :class="vclsx(['t1', 't2'])">Hello world!</h2>
   <h2 :class="vclsx(['t1', 't2', { t3: true }])">Hello world!</h2>
   <h2 :class="vclsx(['t1', 't2', ['fs', { t3: true }]])">Hello world!</h2>
   <hr />
   <button v-class-module="{ active: bg }" @click="bg = !bg">background</button>
-  <button v-class-module="{ active: italic }" @click="italic = !italic">
-    Italic
-  </button>
-  <button v-class-module="{ active: green }" @click="green = !green">
-    Green
-  </button>
+  <button v-class-module="{ active: italic }" @click="italic = !italic">Italic</button>
+  <button v-class-module="{ active: green }" @click="green = !green">Green</button>
 </template>
 <style module>
   * {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+      'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
   button {
