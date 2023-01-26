@@ -1,5 +1,6 @@
+// @ts-expect-error
 import { useCssModule } from 'vue';
-import type { Args, ModuleClasses, Options } from './type';
+import type { Args, ModuleClasses } from './type';
 
 import { optionsConfigure } from './configure';
 import { filterClassesFromInput } from './utils';
@@ -17,7 +18,7 @@ function vueClassName(...args: Args): string {
   return filteredClasses
     .map((key: string) => (cssModuleKey[key] ? cssModuleKey[key] : ''))
     .join(' ')
-    .replace(/\,/g, ' ')
+    .replace(/\\,/g, ' ')
     .trim();
 }
 

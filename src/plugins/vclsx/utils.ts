@@ -6,9 +6,13 @@ let resultValue: Array<string> = [];
 function mapObject({ value }: { value: any }) {
   const d: Array<string> = [];
 
-  Object.keys(value).forEach(function (key: string, index: number) {
+  // Object.keys(value).forEach(function (key: string, index: number) {
+  //   if (value[key]) d.push(key);
+  // });
+
+  for (const key in value) {
     if (value[key]) d.push(key);
-  });
+  }
 
   return d;
 }

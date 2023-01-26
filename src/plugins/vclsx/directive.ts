@@ -36,15 +36,17 @@ function changeClasses({ el, rawClasses, props }: { el: any; rawClasses: any; pr
 
 const handleDirective = {
   beforeMount(el: HTMLElement, binding: any, vnode: any): void {
-    moduleClass = vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName] || {};
-
-    changeClasses({ el, rawClasses: binding.value, props: vnode.props });
+    if (cssModuleName) {
+      moduleClass = vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName] || {};
+      changeClasses({ el, rawClasses: binding.value, props: vnode.props });
+    }
   },
 
   updated(el: HTMLElement, binding: any, vnode: any): void {
-    moduleClass = vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName];
-
-    changeClasses({ el, rawClasses: binding.value, props: vnode.props });
+    if (cssModuleName) {
+      moduleClass = vnode?.dirs[0]?.instance?.$options?.__cssModules[cssModuleName];
+      changeClasses({ el, rawClasses: binding.value, props: vnode.props });
+    }
   },
 };
 
